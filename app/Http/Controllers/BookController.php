@@ -9,13 +9,18 @@ use Illuminate\Http\Request;
 class BookController extends Controller {
 
     public function index () {
-        $books = Book::with('author')->paginate(10);
+        $books = Book::with('author')->get();
+
+        foreach($books as $book) {
+            $book->author = Author::find($book->author);
+        }
+
         return view('books.index', compact('books'));
     }
 
 
     public function create () {
-        $authors = Author::where('status', 1)->get();
+        $authors = Author::orderBy('id', 'asc')->get();
         return view('books.create', compact('authors'));
     }
 
@@ -36,13 +41,15 @@ class BookController extends Controller {
 
     public function show ($id) {
         $book = Book::with('author')->findOrFail($id);
+        $book->author = Author::find($book->author);
+
         return view('books.show', compact('book'));
     }
 
 
     public function edit ($id) {
         $book = Book::findOrFail($id);
-        $authors = Author::where('status', 1)->get(); // Apenas autores ativos
+        $authors = Author::orderByRaw('id = ' . $book->author . ' DESC, name ASC')->get();
         return view('books.edit', compact('book', 'authors'));
     }
 
@@ -66,6 +73,6 @@ class BookController extends Controller {
         $book = Book::findOrFail($id);
         $book->delete();
 
-        return redirect()->route('books.index')->with('success', 'Livro removido com sucesso!');
+        return redirect()->route('books.index')->with('success', 'Livro devolvido com sucesso!');
     }
 }

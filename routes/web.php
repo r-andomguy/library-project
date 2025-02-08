@@ -8,5 +8,6 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::resource('books', BookController::class);
 Route::resource('authors', AuthorController::class);
 require __DIR__ . '/auth.php';
