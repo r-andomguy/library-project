@@ -29,26 +29,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-lg border-0 rounded-3 overflow-hidden h-100">
-                    <a href="{{ route('authors.index') }}" class="text-decoration-none">
-                        <img src="{{ asset('images/authors.jpg') }}"
-                             class="card-img-top img-fluid"
-                             style="height: 250px; object-fit: cover;"
-                             alt="Autores">
-                    </a>
-                    <div class="card-body d-flex flex-column text-center">
-                        <h5 class="card-title fw-semibold text-dark">✍️ Sessão de Autores</h5>
-                        <p class="text-muted small">Cadastre e edite informações dos autores</p>
-                        <div class="mt-auto">
-                            <a href="{{ route('authors.index') }}" class="btn btn-outline-secondary w-100">
-                                <i class="bi bi-pen"></i> Acessar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
