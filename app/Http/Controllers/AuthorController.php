@@ -8,10 +8,9 @@ use Illuminate\Http\Request;
 class AuthorController extends Controller {
 
     public function index () {
-        $authors = Author::paginate(10);
+        $authors = Author::orderBy('id', 'asc')->get();
         return view('authors.index', compact('authors'));
     }
-
 
     public function create () {
         return view('authors.create');
