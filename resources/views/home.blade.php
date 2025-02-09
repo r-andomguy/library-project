@@ -22,8 +22,8 @@
                         <h5 class="card-title fw-semibold text-dark">📖 Sessão de Livros</h5>
                         <p class="text-muted small">Gerencie seu acervo de forma prática</p>
                         <div class="mt-auto">
-                            <a href="{{ route('books.index') }}" class="btn btn-outline-primary w-100">
-                                <i class="bi bi-book"></i> Acessar
+                            <a href="{{ route('books.index') }}" class="btn btn-outline-dark w-100">
+                                Acessar
                             </a>
                         </div>
                     </div>
