@@ -9,7 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Book extends Model {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'publishDate', 'author'];
+    protected $fillable = [
+        'title',
+        'description',
+        'publishDate',
+        'author',
+        'cover'
+    ];
+
     protected $casts = ['publishDate' => 'date'];
 
     public function author (): BelongsTo {
