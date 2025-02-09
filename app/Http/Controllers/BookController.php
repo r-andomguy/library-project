@@ -28,6 +28,9 @@ class BookController extends Controller {
 
 
     /** @noinspection DuplicatedCode */
+    /**
+     * @throws Exception
+     */
     public function store (Request $request) {
         $request->validate(
             [
@@ -43,20 +46,12 @@ class BookController extends Controller {
                 'cover.max' => 'A imagem não pode ter mais de 2MB.',
             ]
         );
-
         $book = new Book();
         $book->title = $request->title;
         $book->description = $request->description;
         $book->publishDate = $request->publishDate;
         $book->author = $request->author;
-
-        if ($request->hasFile('cover')) {
-            if ($book->cover) {
-                Storage::delete("public/covers/$book->cover");
-            }
-
-            $book->cover = $this->processCoverImage($request->file('cover'));
-        }
+        $book->cover = ($request->cover) ? $this->processCoverImage($request->file('cover')) : null;
 
         $book->save();
 
@@ -79,6 +74,9 @@ class BookController extends Controller {
     }
 
 
+    /** @noinspection DuplicatedCode
+     * @throws Exception
+     * */
     public function update (Request $request, $id) {
         $request->validate(
             [

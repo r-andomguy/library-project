@@ -32,10 +32,10 @@
                     </select>
                 </div>
                 <div class="mb-4">
-                    <label for="publication_date" class="form-label fw-bold">Data de Publicação</label>
+                    <label for="publishDate" class="form-label fw-bold">Data de Publicação</label>
                     <input type="date"
                            class="form-control p-3 rounded-lg shadow-sm border-dark focus:ring focus:ring-dark"
-                           id="publication_date" name="publication_date"
+                           id="publishDate" name="publishDate"
                            value="{{ $book->publishDate->format('Y-m-d') }}" required>
                 </div>
                 <div class="mb-4">
@@ -43,32 +43,44 @@
                     <textarea class="form-control p-3 rounded-lg shadow-sm border-dark focus:ring focus:ring-dark"
                               id="description" name="description" rows="4" required>{{ $book->description }}</textarea>
                 </div>
-                <div class="mb-4">
-                    <label for="cover" class="form-label fw-bold">Imagem da Capa</label>
-                    <input type="file"
-                           class="form-control p-3 rounded-lg shadow-sm border-dark focus:ring focus:ring-dark"
-                           id="cover" name="cover" accept="image/jpg, image/png">
-                    <small class="form-text text-muted">Apenas arquivos JPG e PNG com no máximo 2MB.</small>
-                </div>
-                @if ($book->cover)
-                    <div class="mb-4">
-                        <label class="form-label fw-bold">Capa Atual:</label>
-                        <div>
-                            <img src="{{ asset('storage/covers/' . $book->cover) }}"
-                                 alt="Capa do livro"
-                                 class="rounded-lg shadow-sm"
-                                 style="width: 200px; height: 200px; object-fit: cover;">
-                        </div>
+                <div class="mb-4 d-flex align-items-center gap-4">
+                    <div class="flex-grow-1">
+                        <label for="cover" class="form-label fw-bold">Imagem da Capa</label>
+                        <input type="file"
+                               class="form-control p-3 rounded-lg shadow-sm border-dark focus:ring focus:ring-dark"
+                               id="cover" name="cover" accept="image/jpg, image/png">
+                        <small class="form-text text-muted">Apenas arquivos JPG e PNG com no máximo 2MB.</small>
                     </div>
-                @endif
+
+                    @if ($book->cover)
+                        <div class="card shadow-sm border-dark rounded-lg" style="width: 220px;">
+                            <div class="card-body text-center p-2">
+                                <label class="form-label fw-bold">Capa Atual</label>
+                                <div class="border rounded-lg overflow-hidden">
+                                    <img src="{{ asset('storage/covers/' . $book->cover) }}"
+                                         alt="Capa do livro"
+                                         class="w-100"
+                                         style="height: 200px; object-fit: cover;">
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
                 <button type="submit" class="btn btn-dark px-4 py-2 fw-bold">Atualizar</button>
                 <a href="{{ route('books.index') }}" class="btn btn-outline-secondary px-4 py-2">Cancelar</a>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
             </form>
-            @if ($errors->has('cover'))
-                <div class="alert alert-danger mt-2">
-                    {{ $errors->first('cover') }}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
+
         </div>
     </div>
 @endsection
