@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\UserType;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -22,6 +23,7 @@ class User extends Authenticatable {
         'name',
         'email',
         'password',
+        'type'
     ];
 
     /**
@@ -33,6 +35,7 @@ class User extends Authenticatable {
         'password',
         'remember_token',
     ];
+    private int $type;
 
     /**
      * Get the attributes that should be cast.
@@ -43,6 +46,11 @@ class User extends Authenticatable {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'type' => 'int'
         ];
+    }
+
+    public function isAdmin (): bool {
+        return $this->type === UserType::ADMIN;
     }
 }
