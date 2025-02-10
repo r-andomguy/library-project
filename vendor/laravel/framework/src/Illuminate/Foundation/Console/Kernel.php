@@ -276,9 +276,7 @@ class Kernel implements KernelContract
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('logs:clear')
-            ->dailyAt('00:00')
-            ->appendOutputTo(storage_path('logs/scheduler.log'));
+        //
     }
 
     /**
