@@ -30,5 +30,14 @@
                 </div>
             </div>
         </div>
+        @if(session('error'))
+            <div class="alert alert-danger text-center p-2 w-50 mx-auto" style="font-size: 14px;">
+                {{ session('error') }}
+            </div>
+
+
+            <meta http-equiv="refresh" content="3;url={{ route('home') }}">
+        @endif
+
     </div>
 @endsection

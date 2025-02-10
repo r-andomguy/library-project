@@ -12,7 +12,7 @@ Route::get('/auth-web', [WebAuthController::class, 'showLoginForm'])->name('auth
 Route::post('/auth-web-login', [WebAuthController::class, 'login'])->name('auth.web.login');
 Route::post('/auth-web-logout', [WebAuthController::class, 'logout'])->name('auth.web.logout');
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware(['web-admin'])->group(function () {
     Route::resource('books', BookController::class);
 });
 require __DIR__ . '/auth.php';

@@ -47,6 +47,30 @@
                         <i class="bi bi-house-door"></i> Início
                     </a>
                 </li>
+
+                @if(Auth::check())
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i> {{ Auth::user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <form action="{{ route('auth.web.logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="bi bi-box-arrow-right"></i> Sair
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ route('auth.web') }}">
+                            <i class="bi bi-person-circle"></i> Entrar
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>
