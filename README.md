@@ -78,7 +78,7 @@ funcionalidades completas estão na branch master.
 - Proteção das rotas administrativas.
 - Retorno de erro **403 (Forbidden)** para usuários não autorizados.
 
-### Agendamento de Tarefas (branch: tarefa_4)
+### Agendamento de Tarefas (branch: tarefa_5)
 
 - Comando Artisan para limpar registros antigos de logs (mais de **30 dias**).
 - Agendamento diário **à meia-noite**.
