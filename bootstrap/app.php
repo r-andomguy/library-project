@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
             'web-admin' => \App\Http\Middleware\WebAdminMiddleware::class,
             'api-admin' => \App\Http\Middleware\ApiAdminMiddleware::class,
+            \App\Http\Middleware\EnsureDatabaseExists::class
         ]);
 
         //
